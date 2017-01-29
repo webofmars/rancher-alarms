@@ -20,7 +20,8 @@ export default class SlackTarget extends NotificationTarget {
     const webhookPayload = {
       channel: this._channel,
       username: this._botName,
-      text: renderTemplate(this._messageTemplate, data)
+      text: renderTemplate(this._messageTemplate, data),
+      color: this._type
     };
 
     await axios({url: this._url, method: 'POST', data: webhookPayload});
@@ -33,7 +34,8 @@ export default class SlackTarget extends NotificationTarget {
       channel: this._channel,
       webhookUrl: this._webhookUrl,
       botName: this._botName,
-      template: this._messageTemplate
+      template: this._messageTemplate,
+      type: this.type
     };
 
     return `(SlackTarget ${JSON.stringify(options)})`
